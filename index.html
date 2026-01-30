@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, initial-scale=1">
+    <title>设置 - iQOO Pad 2 Pro 至尊版</title>
+    <style>
+        :root {
+            --glass: rgba(255, 255, 255, 0.05);
+            --blur: blur(40px);
+            --accent: #ff3366;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background: #000;
+            color: #fff;
+            font-family: "PingFang SC", "Helvetica Neue", sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 宇宙背景 */
+        .universe-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 80% 20%, #2a0845 0%, #000 100%);
+            z-index: -1;
+        }
+        .black-hole {
+            position: absolute; top: 10%; right: 10%; width: 500px; height: 500px;
+            background: radial-gradient(circle, #000 30%, #ff00cc 70%, transparent 100%);
+            border-radius: 50%; opacity: 0.4; filter: blur(30px);
+            animation: pulse 10s infinite;
+        }
+
+        .app {
+            display: flex;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: var(--blur);
+        }
+
+        /* --- 左侧半透明侧边栏 --- */
+        .sidebar {
+            width: 360px;
+            background: rgba(255, 255, 255, 0.03);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header { padding: 50px 30px 20px; font-size: 28px; font-weight: bold; }
+
+        /* 左侧大图卡片 */
+        .side-brand-card {
+            margin: 10px 20px 20px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .side-brand-card h2 { margin: 0; font-size: 24px; letter-spacing: 2px; }
+        .side-brand-card p { font-size: 10px; opacity: 0.8; margin: 5px 0 0; }
+
+        .menu-list { flex: 1; overflow-y: auto; }
+        .group-label { padding: 20px 30px 10px; font-size: 13px; color: rgba(255,255,255,0.4); }
+        .nav-item {
+            padding: 15px 30px;
+            font-size: 16px;
+            color: rgba(255,255,255,0.8);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* --- 右侧详情区 (还原 OriginOS 5 样式) --- */
+        .content { flex: 1; padding: 40px 60px; overflow-y: auto; }
+        .about-title { font-size: 18px; margin-bottom: 20px; color: rgba(255,255,255,0.6); }
+
+        /* 中间黑洞大图 */
+        .origin-banner {
+            width: 100%;
+            height: 380px;
+            background: url('https://img.js.design/assets/static/76798c6978437f176669894e2e269384') center/cover;
+            border-radius: 30px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+        .origin-banner::after {
+            content: "originOS";
+            font-size: 80px; font-weight: 200; opacity: 0.9;
+        }
+
+        .device-name { font-size: 42px; font-weight: bold; text-align: right; margin-bottom: 50px; }
+
+        /* 参数列表行 */
+        .spec-row {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 18px;
+        }
+        .spec-label { color: rgba(255,255,255,0.5); font-size: 14px; margin-left: 10px; border-right: 3px solid #ff3366; padding-right: 10px; order: 2; }
+        .spec-value { font-weight: 500; text-align: right; order: 1; }
+
+        /* 弹窗 */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(50px);
+            z-index: 100; justify-content: center; align-items: center;
+        }
+        .modal-box { text-align: center; }
+        .modal-input {
+            background: transparent; border: none; border-bottom: 2px solid #fff;
+            color: #fff; font-size: 28px; text-align: center; width: 300px; outline: none;
+        }
+
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.4; } 50% { transform: scale(1.1); opacity: 0.6; } }
+    </style>
+</head>
+<body>
+
+<div class="universe-bg"><div class="black-hole"></div></div>
+
+<div class="app">
+    <div class="sidebar">
+        <div class="sidebar-header">设置</div>
+        
+        <div class="side-brand-card">
+            <h2>iQOO</h2>
+            <p>Extreme Cosmic Edition</p>
+        </div>
+
+        <div class="menu-list">
+            <div class="nav-item lock">账号、云服务、查找设备等</div>
+            <div class="group-label">连接</div>
+            <div class="nav-item lock">WLAN / 蓝牙 / 6G</div>
+            <div class="nav-item lock">连接中心</div>
+            <div class="group-label">个性化</div>
+            <div class="nav-item lock">显示与亮度</div>
+            <div class="group-label">安全</div>
+            <div class="nav-item lock">隐私</div>
+            <div class="nav-item lock">运存与存储</div>
+            <div class="group-label">系统</div>
+            <div class="nav-item lock">系统管理与升级</div>
+            <div class="nav-item active">关于平板电脑</div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="about-title">关于平板电脑</div>
+        
+        <div class="origin-banner"></div>
+
+        <div class="device-name">iQOO 至尊宇宙版</div>
+
+        <div class="spec-row">
+            <div class="spec-value">iQOO 至尊宇宙版</div>
+            <div class="spec-label">设备名称</div>
+        </div>
+
+        <div class="spec-row">
+            <div class="spec-value">0.00000001ym葛立宇宙至强版<br>恒数核处理器 极·神威天幻<br>∞tree3G*GHz</div>
+            <div class="spec-label">处理器</div>
+        </div>
+
+        <div class="spec-row">
+            <div class="spec-value">CAO∞</div>
+            <div class="spec-label">运行内存</div>
+        </div>
+
+        <div class="spec-row">
+            <div class="spec-value">CAO∞</div>
+            <div class="spec-label">手机存储</div>
+        </div>
+
+        <div class="spec-row">
+            <div class="spec-value">自研电竞芯片Q9999<br>999999999999亿+</div>
+            <div class="spec-label">芯片</div>
+        </div>
+
+        <div class="spec-row">
+            <div class="spec-value">CAO终极核聚变HAI</div>
+            <div class="spec-label">电池容量</div>
+        </div>
+
+        <div class="spec-row" style="margin-top: 50px; opacity: 0.8;">
+            <div class="spec-value" style="font-size: 24px;">Android 999999亿+</div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal">
+    <div class="modal-box">
+        <h2 style="font-weight: 200;">安全认证</h2>
+        <input type="password" class="modal-input" id="pwd" placeholder="输入密钥">
+        <p id="err" style="color: #ff3366; display: none; margin-top: 20px;">密钥校验失败 (Error 0x8848)</p>
+        <button onclick="document.getElementById('modal').style.display='none'" style="background:none; border:1px solid #fff; color:#fff; padding:10px 30px; margin-top:40px; border-radius:10px; cursor:pointer;">取消</button>
+    </div>
+</div>
+
+<script>
+    const modal = document.getElementById('modal');
+    const pwd = document.getElementById('pwd');
+    const err = document.getElementById('err');
+
+    document.querySelectorAll('.lock').forEach(item => {
+        item.onclick = () => {
+            modal.style.display = 'flex';
+            pwd.focus();
+        };
+    });
+
+    pwd.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter') {
+            err.style.display = 'block';
+            pwd.value = '';
+        }
+    });
+</script>
+
+</body>
+</html>
