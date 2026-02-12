@@ -1,2 +1,0 @@
-# ytcbueboc
-htxsnoqnotvxien
